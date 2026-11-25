@@ -233,7 +233,7 @@ footer .credit{color:var(--mute);font-size:13px}footer .credit a{color:var(--gol
       <div class="send" id="send" hidden>
         <p><strong>One more step:</strong> tap below to email your RSVP to the host, then press Send in your email app.</p>
         <a class="go mail" id="mail" href="#">✉&nbsp; Email my RSVP</a>
-        <p class="alt">If no email app opens, send these details to <b>Shadowblaq@gmail.com</b>. <button type="button" class="link" id="copy">Copy my RSVP</button><span id="copied" aria-live="polite"></span></p>
+        <p class="alt">If no email app opens, send these details to <b><a href="mailto:shadowblaq@gmail.com">shadowblaq@gmail.com</a></b>. <button type="button" class="link" id="copy">Copy my RSVP</button><span id="copied" aria-live="polite"></span></p>
       </div>
       <div class="actions">
         <a class="ghost" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Krispy+Half+a+Century+50+Dinner+Gala&amp;dates=20261224T180000/20261224T223000&amp;ctz=America/New_York&amp;location=Feisty+Hall%2C+513+21st+Ave%2C+Paterson%2C+NJ+07513&amp;details=Shadow+presents+Krispy%27s+50th+Dinner+Gala">Add to Google Calendar</a>
@@ -244,6 +244,7 @@ footer .credit{color:var(--mute);font-size:13px}footer .credit a{color:var(--gol
 
   <footer>
     <div>Shadow presents · Krispy Half a Century 50 · Dinner Gala</div>
+    <div>Host · <a href="mailto:shadowblaq@gmail.com">shadowblaq@gmail.com</a></div>
     <div class="credit">Designed by <a href="https://www.claytech.global" target="_blank" rel="noopener">ClayTech Global</a> · <a href="tel:+15702428580">(570) 242-8580</a> · <a href="https://www.claytech.global" target="_blank" rel="noopener">www.claytech.global</a></div>
   </footer>
 </main>
@@ -255,7 +256,7 @@ footer .credit{color:var(--mute);font-size:13px}footer .credit a{color:var(--gol
   const DEADLINE = new Date('2026-12-10T23:59:59-05:00');
   const KEY = 'krispy50-rsvp';
 
-  const HOST = 'Shadowblaq@gmail.com';
+  const HOST = 'shadowblaq@gmail.com';
   const summary = r => `RSVP for Krispy Half a Century 50 Dinner Gala (Dec 24, 2026)\n\nName: ${r.name}\nPhone: ${r.phone}\nEmail: ${r.email}\nNumber of guests: ${r.guests}\nConfirmation code: ${r.code}`;
   /* Emails the RSVP to the host through FormSubmit. Returns false where the page cannot reach it. */
   async function sendRSVP(r){
@@ -281,7 +282,7 @@ footer .credit{color:var(--mute);font-size:13px}footer .credit a{color:var(--gol
   }
   tick(); setInterval(tick, 1000);
 
-  if (new Date() > DEADLINE){ const b=$('by'); b.textContent='The RSVP deadline (12/10/2026) has passed. Please contact the host directly.'; b.classList.add('closed'); }
+  if (new Date() > DEADLINE){ const b=$('by'); b.innerHTML='The RSVP deadline (12/10/2026) has passed. Please contact the host at <a href="mailto:shadowblaq@gmail.com">shadowblaq@gmail.com</a>.'; b.classList.add('closed'); }
 
   const phone = $('phone');
   phone.addEventListener('input', () => {
