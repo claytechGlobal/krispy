@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Krispy 50 Gala RSVP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Monoton&family=Pacifico&family=Outfit:wght@400;600;800&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: night-out swagger, neon sunset glamour, celebratory
+   IDEA: a beachfront night-club marquee and VIP door pass
+   PICTURE: the event flyer framed in neon, over a retro sun, palms and skyline
+   COLOUR and TYPE: deep violet night, hot pink + sunset orange glow, gold lettering; Pacifico script, Cinzel, Outfit
+   LAYOUT: one column: marquee title, flyer, details strip, countdown, RSVP card, door pass */
+:root{color-scheme:dark;--night:#12061f;--violet:#2a0b45;--pink:#ff3fa4;--orange:#ff8a3d;--cyan:#38e8ff;--gold:#ffd36b;--gold2:#c98a1b;--ink:#f6ecff;--mute:#cdb7e6}
+:root[data-theme=light],:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--night);color:var(--ink);font:16px/1.55 Outfit,system-ui,sans-serif;overflow-x:clip;min-height:100vh}
+a{color:var(--cyan)}
+
+/* ---------- backdrop: sky, sun, skyline, palms, grid ---------- */
+.sky{position:fixed;inset:0;z-index:-1;overflow:hidden;background:linear-gradient(180deg,#0d0420 0%,#2a0b45 34%,#7a1d6e 55%,#ff5f7e 70%,#ffa04a 78%,#12061f 78.2%,#12061f 100%)}
+.sun{position:absolute;left:50%;top:44%;width:min(70vw,520px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;
+ background:linear-gradient(180deg,#ffe27a 0%,#ff9a3d 45%,#ff3fa4 100%);
+ -webkit-mask:repeating-linear-gradient(180deg,#000 0 14px,transparent 14px 20px);mask:repeating-linear-gradient(180deg,#000 0 14px,transparent 14px 20px);
+ filter:drop-shadow(0 0 60px #ff3fa4);opacity:.85;animation:sun 9s ease-in-out infinite alternate}
+@keyframes sun{to{transform:translateX(-50%) translateY(14px);filter:drop-shadow(0 0 90px #ff8a3d)}}
+.skyline{position:absolute;left:0;right:0;bottom:22%;height:22vh;width:100%}
+.grid{position:absolute;left:-50%;right:-50%;bottom:0;height:22%;transform:perspective(300px) rotateX(62deg);transform-origin:top;
+ background:linear-gradient(transparent 0 94%,#ff3fa4 94%) 0 0/100% 40px,linear-gradient(90deg,transparent 0 97%,#ff3fa480 97%) 0 0/60px 100%;animation:grid 1.6s linear infinite}
+@keyframes grid{to{background-position:0 40px,0 0}}
+.palm{position:absolute;bottom:20%;width:min(34vw,260px);height:auto;filter:drop-shadow(0 0 12px #ff3fa455)}
+.palm.l{left:-3vw;animation:sway 6s ease-in-out infinite alternate;transform-origin:bottom center}
+.palm.r{right:-3vw;transform:scaleX(-1);animation:swayr 7s ease-in-out infinite alternate;transform-origin:bottom center}
+@keyframes sway{to{transform:rotate(2.5deg)}}@keyframes swayr{to{transform:scaleX(-1) rotate(2.5deg)}}
+.scan{position:fixed;inset:0;pointer-events:none;z-index:5;background:repeating-linear-gradient(180deg,#0000 0 3px,#0000000d 3px 4px)}
+
+/* ---------- layout ---------- */
+main{width:min(100%,760px);margin:0 auto;padding:clamp(20px,4vw,40px) 16px 60px;display:grid;gap:22px}
+.marquee{display:grid;place-items:center;padding-top:4px}
+.neon{position:relative;width:min(62%,260px)}
+.logo{position:relative;z-index:1;display:block;width:100%;height:auto;
+ filter:drop-shadow(0 0 2px #fff6d6) drop-shadow(0 0 8px #ffb84d) drop-shadow(0 0 18px #ff3fa4) drop-shadow(0 0 34px #7a3cff);animation:glow 3s ease-in-out infinite alternate,tube 6s infinite}
+@keyframes glow{to{filter:drop-shadow(0 0 3px #fff6d6) drop-shadow(0 0 16px #ffd36b) drop-shadow(0 0 40px #ff3fa4) drop-shadow(0 0 70px #7a3cff)}}
+@keyframes tube{0%,17%,21%,58%,60%,100%{opacity:1}19%,59%{opacity:.6}}
+@keyframes shine{to{background-position:-250% 0}}
+.flyer{position:relative;border-radius:22px;padding:3px;background:linear-gradient(120deg,var(--pink),var(--orange),var(--gold),var(--cyan),var(--pink)) 0 0/300% 300%;animation:edge 6s linear infinite;box-shadow:0 0 30px #ff3fa466,0 20px 60px #000a}
+@keyframes edge{to{background-position:300% 0}}
+.flyer img{display:block;width:100%;height:auto;border-radius:19px}
+
+.facts{display:grid;grid-template-columns:auto auto minmax(0,1.4fr);align-items:center;border-radius:18px;padding:16px 8px;background:linear-gradient(90deg,#1a0930e6,#2a0b45e6,#1a0930e6);border:1.5px solid #ff6fc4;box-shadow:0 0 6px #fff4,0 0 18px #ff3fa488,inset 0 0 22px #7a3cff44;backdrop-filter:blur(6px)}
+.fact{padding:4px clamp(14px,3vw,26px);text-align:center}
+.fact+.fact{border-left:1.5px solid #38e8ffaa}
+.fact b{display:block;font-size:13px;font-weight:600;color:var(--cyan);text-shadow:0 0 8px #38e8ff88}
+.fact span{font-weight:600;font-size:17px;white-space:nowrap;color:#fff;text-shadow:0 0 8px #ffd36b66}
+.fact .addr{font-weight:400;font-size:14px;color:var(--mute)}
+.fact a{font-size:14px;white-space:nowrap}
+
+.count{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.cell{min-width:74px;text-align:center;padding:10px 8px;border-radius:14px;background:#0d0420cc;border:1px solid #38e8ff55;box-shadow:inset 0 0 18px #38e8ff22}
+.cell b{display:block;font:800 30px/1 Outfit;color:#fff;text-shadow:0 0 10px var(--cyan),0 0 22px var(--cyan);font-variant-numeric:tabular-nums}
+.cell span{font-size:13px;color:var(--mute)}
+
+/* ---------- RSVP card ---------- */
+.card{position:relative;border-radius:24px;padding:clamp(22px,4vw,34px);background:linear-gradient(180deg,#1d0a36f2,#12061ff2);border:1.5px solid #ff6fc4;box-shadow:0 0 0 1px #ff3fa433,0 0 28px #ff3fa477,inset 0 0 40px #7a3cff22}
+.card h2{margin:0;text-align:center;font:800 clamp(34px,8vw,48px)/1.05 Outfit;font-style:italic;letter-spacing:.02em;
+ background:linear-gradient(180deg,#fff6d6,#ffd36b 45%,#c98a1b);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 10px #ffb84d88)}
+.card .lead{text-align:center;margin:6px 0 22px;color:var(--mute)}
+.card .lead strong{color:var(--gold)}
+form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 18px}
+.field{display:grid;gap:6px}
+label{font-weight:600;font-size:15px}
+label i{color:var(--pink);font-style:normal}
+.box{position:relative}
+.box svg{position:absolute;left:14px;top:50%;width:20px;height:20px;transform:translateY(-50%);stroke:#7d5aa6;fill:none;stroke-width:1.8;pointer-events:none}
+input,select{width:100%;min-height:50px;padding:12px 14px 12px 44px;font:16px Outfit,sans-serif;color:#1d0a36;background:#f3e9ff;border:2px solid transparent;border-radius:12px;outline:none;transition:border-color .2s,box-shadow .2s;appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,#5a3a80 50%),linear-gradient(135deg,#5a3a80 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px;background-repeat:no-repeat}
+input:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #38e8ff55,0 0 18px #38e8ff66}
+.field.bad input,.field.bad select{border-color:var(--pink);box-shadow:0 0 0 3px #ff3fa444}
+.err{min-height:18px;font-size:13px;color:#ff9fd0}
+.full{grid-column:1/-1}
+button{font:inherit;cursor:pointer}
+.go{grid-column:1/-1;justify-self:center;width:min(100%,420px);min-height:58px;border:0;border-radius:999px;font:800 20px Outfit;letter-spacing:.04em;color:#2a1200;
+ background:linear-gradient(100deg,#c98a1b,#ffe9a8 30%,#ffd36b 50%,#fff3c4 60%,#c98a1b) 0 0/250% 100%;box-shadow:0 0 0 2px #fff3c4aa,0 0 24px #ffb84d99,0 8px 0 #7a4a08;animation:shine 3.5s linear infinite;transition:transform .12s}
+.go:hover{transform:translateY(-2px)}.go:active{transform:translateY(4px);box-shadow:0 0 0 2px #fff3c4aa,0 0 24px #ffb84d99,0 3px 0 #7a4a08}
+.go:focus-visible{outline:3px solid var(--cyan);outline-offset:4px}
+.go[disabled]{opacity:.7;cursor:wait}
+.by{grid-column:1/-1;text-align:center;margin:0;color:var(--gold);font-weight:600}
+.by.closed{color:#ff9fd0}
+
+/* ---------- door pass ---------- */
+.pass{display:none;text-align:center;animation:pop .6s cubic-bezier(.2,1.4,.4,1)}
+.pass.on{display:block}
+@keyframes pop{from{transform:scale(.85);opacity:0}}
+.pass .stamp{display:inline-block;margin:4px 0 14px;padding:6px 18px;border:2px solid var(--cyan);border-radius:10px;color:#fff;font:800 15px Outfit;letter-spacing:.14em;text-shadow:0 0 10px var(--cyan);box-shadow:0 0 16px #38e8ff66;transform:rotate(-3deg)}
+.pass h3{margin:0;font:400 clamp(30px,7vw,42px)/1.15 Pacifico,cursive;color:#fff;text-shadow:0 0 12px var(--pink),0 0 30px var(--pink)}
+.ticket{margin:18px auto 0;max-width:460px;text-align:left;border-radius:16px;background:#f3e9ff;color:#1d0a36;padding:18px 20px;position:relative;box-shadow:0 0 24px #ff3fa466}
+.ticket::before,.ticket::after{content:"";position:absolute;top:50%;width:22px;height:22px;border-radius:50%;background:#12061f;transform:translateY(-50%)}
+.ticket::before{left:-11px}.ticket::after{right:-11px}
+.ticket dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 16px}
+.ticket dt{font-size:13px;font-weight:600;color:#7d5aa6;padding-top:2px}
+.ticket dd{margin:0;font-weight:600;overflow-wrap:anywhere}
+.ticket .code{margin-top:14px;padding-top:12px;border-top:2px dashed #c9b3e6;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px}
+.ticket .code b{font:800 18px Outfit;letter-spacing:.12em;color:#b0127a}
+.send{margin:20px auto 0;max-width:460px;padding:16px;border-radius:16px;border:1.5px dashed var(--gold);background:#2a0b4580}
+.send p{margin:0 0 12px}.send .alt{margin:12px 0 0;font-size:14px;color:var(--mute)}.send .alt b{color:#fff;overflow-wrap:anywhere}
+.go.mail{display:flex;align-items:center;justify-content:center;text-decoration:none;margin:0 auto}
+.link{background:none;border:0;padding:4px;color:var(--cyan);text-decoration:underline;font-size:14px;min-height:32px}
+#copied{margin-left:6px;color:var(--gold)}
+.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:18px}
+.ghost{min-height:46px;padding:10px 20px;border-radius:999px;border:1.5px solid var(--cyan);background:#0d0420;color:#fff;text-decoration:none;display:inline-flex;align-items:center;font-weight:600;box-shadow:0 0 12px #38e8ff44}
+.ghost:hover{background:#38e8ff22}
+.ghost:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+footer{text-align:center;color:#fff;font-size:14px;padding:10px 18px;justify-self:center;border-radius:18px;background:#12061fcc;display:grid;gap:4px}
+footer .credit{color:var(--mute);font-size:13px}footer .credit a{color:var(--gold);text-decoration:none;white-space:nowrap;text-shadow:0 0 8px #ffb84d66}footer .credit a:hover{text-decoration:underline}
+
+@media(max-width:600px){
+ .facts{grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:12px}
+ .fact:nth-child(3){grid-column:1/-1;border-left:0;box-shadow:none;border-top:1.5px solid var(--cyan);padding-top:12px}
+ form{grid-template-columns:minmax(0,1fr)}
+ .cell{min-width:66px}.cell b{font-size:24px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true">
+  <div class="sun"></div>
+  <svg class="skyline" viewBox="0 0 1200 200" preserveAspectRatio="none">
+    <defs><linearGradient id="bld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a0f5c"/><stop offset="1" stop-color="#14051f"/></linearGradient>
+    <pattern id="win" width="14" height="16" patternUnits="userSpaceOnUse"><rect x="4" y="4" width="4" height="6" fill="#ffd36b" opacity=".55"/></pattern></defs>
+    <g fill="url(#bld)">
+      <rect x="0" y="110" width="70" height="90"/><rect x="80" y="70" width="50" height="130"/><rect x="140" y="40" width="60" height="160"/><rect x="210" y="95" width="70" height="105"/>
+      <rect x="300" y="20" width="44" height="180"/><rect x="350" y="80" width="80" height="120"/><rect x="440" y="55" width="54" height="145"/>
+      <rect x="700" y="60" width="60" height="140"/><rect x="770" y="10" width="48" height="190"/><rect x="826" y="85" width="70" height="115"/><rect x="905" y="45" width="56" height="155"/>
+      <rect x="970" y="100" width="80" height="100"/><rect x="1060" y="30" width="50" height="170"/><rect x="1120" y="90" width="80" height="110"/>
+    </g>
+    <g fill="url(#win)"><rect x="140" y="50" width="60" height="150"/><rect x="300" y="30" width="44" height="170"/><rect x="770" y="20" width="48" height="180"/><rect x="1060" y="40" width="50" height="160"/><rect x="440" y="65" width="54" height="135"/><rect x="905" y="55" width="56" height="145"/></g>
+    <g stroke="#ff3fa4" stroke-width="1.5" opacity=".7"><line x1="140" y1="40" x2="200" y2="40"/><line x1="770" y1="10" x2="818" y2="10"/><line x1="300" y1="20" x2="344" y2="20"/><line x1="1060" y1="30" x2="1110" y2="30"/></g>
+  </svg>
+  <svg class="palm l" viewBox="0 0 200 320" aria-hidden="true"><use href="#palm"/></svg>
+  <svg class="palm r" viewBox="0 0 200 320" aria-hidden="true"><use href="#palm"/></svg>
+  <div class="grid"></div>
+</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <g id="palm" fill="#0b0215">
+    <path d="M96 320c4-70 10-150 30-215l9 3c-18 64-24 142-27 212z"/>
+    <path d="M130 100c-40-30-90-30-128 2 40-10 80-6 120 10z"/>
+    <path d="M130 100c-20-40-60-70-110-70 40 14 72 40 100 78z"/>
+    <path d="M131 98c10-44 40-80 80-92-30 26-50 58-66 98z"/>
+    <path d="M132 100c40-18 70-10 68 30-14-22-38-28-64-24z"/>
+    <path d="M132 102c30 6 52 30 50 70-14-30-30-48-56-60z"/>
+    <path d="M128 104c-30 6-60 34-68 76 18-30 40-52 74-66z"/>
+  </g></defs></svg>
+<div class="scan" aria-hidden="true"></div>
+
+<main>
+  <header class="marquee">
+    <div class="neon">
+      <img class="logo" src="images/logo.webp" alt="Shadow presents Krispy Half a Century 50 Dinner Gala" width="800" height="684">
+    </div>
+  </header>
+
+  <figure class="flyer" style="margin:0"><img src="images/hero.jpg" alt="Event flyer: Shadow presents Krispy Half a Century 50 Dinner Gala, 12/24/2026, 6:00 to 10:30 PM, Feisty Hall, Paterson NJ" width="960" height="672"></figure>
+
+  <section class="facts" aria-label="Event details">
+    <div class="fact"><b>Date</b><span>Thu, Dec 24, 2026</span></div>
+    <div class="fact"><b>Time</b><span>6:00 – 10:30 PM</span></div>
+    <div class="fact"><b>Where</b><span>Feisty Hall</span><div class="addr">513 21st Ave, Paterson, NJ 07513 · <a href="https://www.google.com/maps/search/?api=1&amp;query=513+21st+Ave+Paterson+NJ+07513" target="_blank" rel="noopener">Directions</a></div></div>
+  </section>
+
+  <section class="count" aria-label="Countdown to the gala" id="count">
+    <div class="cell"><b id="cd-d">--</b><span>days</span></div>
+    <div class="cell"><b id="cd-h">--</b><span>hours</span></div>
+    <div class="cell"><b id="cd-m">--</b><span>min</span></div>
+    <div class="cell"><b id="cd-s">--</b><span>sec</span></div>
+  </section>
+
+  <section class="card" id="rsvp" aria-labelledby="rsvp-title">
+    <div id="formView">
+      <h2 id="rsvp-title">RSVP</h2>
+      <p class="lead">Confirm your attendance by <strong>Thursday, Dec 10, 2026</strong></p>
+      <form id="f" novalidate>
+        <div class="field" id="w-name">
+          <label for="name">Full name <i>*</i></label>
+          <div class="box"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>
+          <input id="name" name="name" autocomplete="name" placeholder="Enter your full name" required></div>
+          <div class="err" aria-live="polite"></div>
+        </div>
+        <div class="field" id="w-phone">
+          <label for="phone">Phone number <i>*</i></label>
+          <div class="box"><svg viewBox="0 0 24 24"><path d="M5 3h4l2 5-3 2a12 12 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2A18 18 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>
+          <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(555) 123-4567" required></div>
+          <div class="err" aria-live="polite"></div>
+        </div>
+        <div class="field" id="w-email">
+          <label for="email">Email address <i>*</i></label>
+          <div class="box"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="Enter your email" required></div>
+          <div class="err" aria-live="polite"></div>
+        </div>
+        <div class="field" id="w-guests">
+          <label for="guests">Number of guests <i>*</i></label>
+          <div class="box"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.8"/><path d="M2 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5M15 14.6c3 .1 5.6 1.8 6.4 5.4"/></svg>
+          <select id="guests" name="guests" required>
+            <option value="">Select number</option>
+            <option value="1">1 (just me)</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option>
+          </select></div>
+          <div class="err" aria-live="polite"></div>
+        </div>
+        <button class="go" type="submit" id="go">✓&nbsp; Confirm RSVP</button>
+        <p class="by" id="by">Please RSVP by 12/10/2026</p>
+      </form>
+    </div>
+
+    <div class="pass" id="pass" aria-live="polite">
+      <div class="stamp" id="p-stamp">VIP · RSVP SENT</div>
+      <h3 id="p-hi">See you there!</h3>
+      <div class="ticket">
+        <dl>
+          <dt>Guest</dt><dd id="p-name"></dd>
+          <dt>Party of</dt><dd id="p-guests"></dd>
+          <dt>Phone</dt><dd id="p-phone"></dd>
+          <dt>Email</dt><dd id="p-email"></dd>
+          <dt>When</dt><dd>Dec 24, 2026 · 6:00 – 10:30 PM</dd>
+          <dt>Where</dt><dd>Feisty Hall, 513 21st Ave, Paterson, NJ</dd>
+        </dl>
+        <div class="code"><span>Krispy 50 Dinner Gala</span><b id="p-code"></b></div>
+      </div>
+      <div class="send" id="send" hidden>
+        <p><strong>One more step:</strong> tap below to email your RSVP to the host, then press Send in your email app.</p>
+        <a class="go mail" id="mail" href="#">✉&nbsp; Email my RSVP</a>
+        <p class="alt">If no email app opens, send these details to <b>Shadowblaq@gmail.com</b>. <button type="button" class="link" id="copy">Copy my RSVP</button><span id="copied" aria-live="polite"></span></p>
+      </div>
+      <div class="actions">
+        <a class="ghost" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Krispy+Half+a+Century+50+Dinner+Gala&amp;dates=20261224T180000/20261224T223000&amp;ctz=America/New_York&amp;location=Feisty+Hall%2C+513+21st+Ave%2C+Paterson%2C+NJ+07513&amp;details=Shadow+presents+Krispy%27s+50th+Dinner+Gala">Add to Google Calendar</a>
+        <button class="ghost" type="button" id="edit">Edit my RSVP</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Shadow presents · Krispy Half a Century 50 · Dinner Gala</div>
+    <div class="credit">Designed by <a href="https://www.claytech.global" target="_blank" rel="noopener">ClayTech Global</a> · <a href="tel:+15702428580">(570) 242-8580</a> · <a href="https://www.claytech.global" target="_blank" rel="noopener">www.claytech.global</a></div>
+  </footer>
+</main>
+
+<script>
+{
+  const $ = id => document.getElementById(id);
+  const EVENT = new Date('2026-12-24T18:00:00-05:00');
+  const DEADLINE = new Date('2026-12-10T23:59:59-05:00');
+  const KEY = 'krispy50-rsvp';
+
+  const HOST = 'Shadowblaq@gmail.com';
+  const summary = r => `RSVP for Krispy Half a Century 50 Dinner Gala (Dec 24, 2026)\n\nName: ${r.name}\nPhone: ${r.phone}\nEmail: ${r.email}\nNumber of guests: ${r.guests}\nConfirmation code: ${r.code}`;
+  /* Emails the RSVP to the host through FormSubmit. Returns false where the page cannot reach it. */
+  async function sendRSVP(r){
+    try {
+      const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 12000);
+      const res = await fetch('https://formsubmit.co/ajax/' + HOST, { method:'POST', signal: ctl.signal,
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify({ _subject:'RSVP: ' + r.name + ' (party of ' + r.guests + ')', _template:'table', _captcha:'false', _replyto:r.email,
+          'Full name':r.name, 'Phone':r.phone, 'Email':r.email, 'Number of guests':r.guests, 'Confirmation code':r.code }) });
+      clearTimeout(t);
+      const j = await res.json().catch(() => ({}));
+      return res.ok && String(j.success) === 'true';
+    } catch(_) { return false; }
+  }
+
+  const pad = n => String(n).padStart(2,'0');
+  function tick(){
+    let ms = Math.max(0, EVENT - new Date());
+    const d = Math.floor(ms/864e5); ms -= d*864e5;
+    const h = Math.floor(ms/36e5); ms -= h*36e5;
+    const m = Math.floor(ms/6e4); ms -= m*6e4;
+    $('cd-d').textContent = d; $('cd-h').textContent = pad(h); $('cd-m').textContent = pad(m); $('cd-s').textContent = pad(Math.floor(ms/1e3));
+  }
+  tick(); setInterval(tick, 1000);
+
+  if (new Date() > DEADLINE){ const b=$('by'); b.textContent='The RSVP deadline (12/10/2026) has passed. Please contact the host directly.'; b.classList.add('closed'); }
+
+  const phone = $('phone');
+  phone.addEventListener('input', () => {
+    const d = phone.value.replace(/\D/g,'').replace(/^1(?=\d{10})/,'').slice(0,10);
+    phone.value = d.length > 6 ? `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}` : d.length > 3 ? `(${d.slice(0,3)}) ${d.slice(3)}` : d;
+  });
+
+  const rules = {
+    name: v => v.trim().split(/\s+/).length >= 2 && v.trim().length >= 3 ? '' : 'Please enter your first and last name.',
+    phone: v => v.replace(/\D/g,'').length === 10 ? '' : 'Please enter a 10-digit phone number.',
+    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'Please enter a valid email address.',
+    guests: v => v ? '' : 'Please choose how many are coming.'
+  };
+  function check(k){
+    const msg = rules[k]($(k).value), w = $('w-'+k);
+    w.classList.toggle('bad', !!msg); w.querySelector('.err').textContent = msg;
+    return !msg;
+  }
+  for (const k in rules) $(k).addEventListener('blur', () => { if ($(k).value) check(k); });
+  for (const k in rules) $(k).addEventListener('input', () => { if ($('w-'+k).classList.contains('bad')) check(k); });
+
+  const code = s => { let h=0; for (const c of s) h = (h*31 + c.charCodeAt(0)) >>> 0; return 'K50-' + h.toString(36).toUpperCase().slice(-5).padStart(5,'0'); };
+
+  function showPass(r){
+    $('p-hi').textContent = 'See you there, ' + r.name.split(' ')[0] + '!';
+    $('p-name').textContent = r.name;
+    $('p-guests').textContent = r.guests === '1' ? '1 (just me)' : r.guests;
+    $('p-phone').textContent = r.phone;
+    $('p-email').textContent = r.email;
+    $('p-code').textContent = r.code;
+    const sent = !!r.sent;
+    $('p-stamp').textContent = sent ? 'VIP · RSVP SENT' : 'ALMOST DONE';
+    $('send').hidden = sent;
+    if (!sent) $('mail').href = 'mailto:' + HOST + '?subject=' + encodeURIComponent('RSVP: ' + r.name + ' (party of ' + r.guests + ')') + '&body=' + encodeURIComponent(summary(r));
+    window.__rsvp = r;
+    $('formView').style.display = 'none';
+    $('pass').classList.add('on');
+  }
+
+  $('f').addEventListener('submit', async e => {
+    e.preventDefault();
+    const ok = Object.keys(rules).map(check).every(Boolean);
+    if (!ok){ document.querySelector('.field.bad input, .field.bad select')?.focus(); return; }
+    const r = { name: $('name').value.trim().replace(/\s+/g,' '), phone: phone.value, email: $('email').value.trim(), guests: $('guests').value, at: new Date().toISOString() };
+    r.code = code(r.name + r.email);
+    const btn = $('go'); btn.disabled = true; btn.textContent = 'Sending…';
+    try { r.sent = await sendRSVP(r); } finally { btn.disabled = false; btn.innerHTML = '✓&nbsp; Confirm RSVP'; }
+    try { localStorage.setItem(KEY, JSON.stringify(r)); } catch(_){}
+    showPass(r);
+    $('rsvp').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  $('mail').addEventListener('click', () => { const r = window.__rsvp; if (r && !r.sent){ r.mailed = true; try { localStorage.setItem(KEY, JSON.stringify(r)); } catch(_){} } });
+  $('copy').addEventListener('click', async () => {
+    const r = window.__rsvp; if (!r) return;
+    try { await navigator.clipboard.writeText(summary(r)); $('copied').textContent = 'Copied'; } catch(_) { $('copied').textContent = 'Copy blocked; please type it in'; }
+  });
+  $('edit').addEventListener('click', () => {
+    $('pass').classList.remove('on'); $('formView').style.display = '';
+    $('name').focus();
+  });
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (saved && saved.name){ for (const k of ['name','phone','email','guests']) $(k).value = saved[k] || ''; showPass(saved); }
+  } catch(_){}
+}
+</script>
+</body>
+</html>
