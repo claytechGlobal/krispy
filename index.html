@@ -258,17 +258,15 @@ footer .credit{color:var(--mute);font-size:13px}footer .credit a{color:var(--gol
 
   const HOST = 'shadowblaq@gmail.com';
   const summary = r => `RSVP for Krispy Half a Century 50 Dinner Gala (Dec 24, 2026)\n\nName: ${r.name}\nPhone: ${r.phone}\nEmail: ${r.email}\nNumber of guests: ${r.guests}\nConfirmation code: ${r.code}`;
-  /* Emails the RSVP to the host through FormSubmit. Returns false where the page cannot reach it. */
   async function sendRSVP(r){
     try {
-      const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 12000);
-      const res = await fetch('https://formsubmit.co/ajax/' + HOST, { method:'POST', signal: ctl.signal,
-        headers:{'Content-Type':'application/json','Accept':'application/json'},
-        body: JSON.stringify({ _subject:'RSVP: ' + r.name + ' (party of ' + r.guests + ')', _template:'table', _captcha:'false', _replyto:r.email,
-          'Full name':r.name, 'Phone':r.phone, 'Email':r.email, 'Number of guests':r.guests, 'Confirmation code':r.code }) });
+      const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 15000);
+      const res = await fetch('/api/rsvp', { method:'POST', signal: ctl.signal,
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ name:r.name, phone:r.phone, email:r.email, guests:r.guests, code:r.code }) });
       clearTimeout(t);
       const j = await res.json().catch(() => ({}));
-      return res.ok && String(j.success) === 'true';
+      return res.ok && j.ok === true;
     } catch(_) { return false; }
   }
 
